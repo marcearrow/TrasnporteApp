@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9a5bf6d9aa924a6f9c44ba8897c0739e" Name="Diagram1">
+        <EntityTypeShape EntityType="EntityModeloBD.Empleado" Width="1.5" PointX="3.125" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="EntityModeloBD.Rol" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <AssociationConnector Association="EntityModeloBD.FK_Empleado_Rol" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="EntityModeloBD.Vehiculo" Width="1.5" PointX="5.625" PointY="1.375" />
+        <AssociationConnector Association="EntityModeloBD.FK_Vehiculo_Empleado" />
+        <EntityTypeShape EntityType="EntityModeloBD.Sucursal" Width="1.5" PointX="0.75" PointY="5" />
+        <EntityTypeShape EntityType="EntityModeloBD.Ruta" Width="1.5" PointX="7.875" PointY="3.125" />
+        <AssociationConnector Association="EntityModeloBD.FK_Ruta_Sucursal" />
+        <AssociationConnector Association="EntityModeloBD.FK_Ruta_Sucursal1" />
+        <AssociationConnector Association="EntityModeloBD.FK_Ruta_Vehiculo" />
+        <EntityTypeShape EntityType="EntityModeloBD.Compra" Width="1.5" PointX="5.375" PointY="5.875" />
+        <EntityTypeShape EntityType="EntityModeloBD.Pasaje" Width="1.5" PointX="10.125" PointY="2.5" />
+        <AssociationConnector Association="EntityModeloBD.FK_Compra_Empleado" />
+        <AssociationConnector Association="EntityModeloBD.FK_Pasaje_Ruta" />
+        <AssociationConnector Association="EntityModeloBD.FK_Pasaje_Vehiculo" />
+        <EntityTypeShape EntityType="EntityModeloBD.Detallescompra" Width="1.5" PointX="12.375" PointY="3.875" />
+        <AssociationConnector Association="EntityModeloBD.FK_Detallescompra_Compra" />
+        <AssociationConnector Association="EntityModeloBD.FK_Detallescompra_Pasaje" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

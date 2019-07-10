@@ -1,0 +1,667 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="EntityModeloBD.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Compra">
+          <Key>
+            <PropertyRef Name="id_compra" />
+          </Key>
+          <Property Name="id_compra" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fecha_compra" Type="date" />
+          <Property Name="id_empleado" Type="int" />
+        </EntityType>
+        <EntityType Name="Detallescompra">
+          <Key>
+            <PropertyRef Name="id_detalles" />
+          </Key>
+          <Property Name="id_detalles" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_compra" Type="int" />
+          <Property Name="id_pasaje" Type="int" />
+          <Property Name="precio_pasaje" Type="float" />
+          <Property Name="cantidad_compra" Type="int" />
+          <Property Name="total_compra" Type="int" />
+        </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="id_empleado" />
+          </Key>
+          <Property Name="id_empleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="rut_empleado" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="clave_empleado" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="nombre_empleado" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="apellidop_empleado" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="apellidom_empleado" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="telefono_empleado" Type="varchar" MaxLength="10" />
+          <Property Name="email_empleado" Type="varchar" MaxLength="40" />
+          <Property Name="direccion_empleado" Type="varchar" MaxLength="40" />
+          <Property Name="id_rol" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pasaje">
+          <Key>
+            <PropertyRef Name="id_pasaje" />
+          </Key>
+          <Property Name="id_pasaje" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_pasaje" Type="varchar" MaxLength="40" />
+          <Property Name="fecha_pasaje" Type="datetime" />
+          <Property Name="precio_pasaje" Type="float" />
+          <Property Name="id_vehiculo" Type="int" />
+          <Property Name="id_ruta" Type="int" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="id_rol" />
+          </Key>
+          <Property Name="id_rol" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_rol" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ruta">
+          <Key>
+            <PropertyRef Name="id_ruta" />
+          </Key>
+          <Property Name="id_ruta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_ruta" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="descripcion_ruta" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="inicio_ruta" Type="int" />
+          <Property Name="llegada_ruta" Type="int" />
+          <Property Name="id_vehiculo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sucursal">
+          <Key>
+            <PropertyRef Name="id_sucursal" />
+          </Key>
+          <Property Name="id_sucursal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_sucursal" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="descripcion_sucursal" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="direccion_sucursal" Type="varchar" MaxLength="50" />
+          <Property Name="lat_sucursal" Type="float" />
+          <Property Name="long_sucursal" Type="float" />
+        </EntityType>
+        <EntityType Name="Vehiculo">
+          <Key>
+            <PropertyRef Name="id_vehiculo" />
+          </Key>
+          <Property Name="id_vehiculo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre_vehiculo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="modelo_vehiculo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="capacidad_vehiculo" Type="int" Nullable="false" />
+          <Property Name="patente_vehiculo" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="estado_vehiculo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="id_empleado" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Compra_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
+          <End Role="Compra" Type="Self.Compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="Compra">
+              <PropertyRef Name="id_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Detallescompra_Compra">
+          <End Role="Compra" Type="Self.Compra" Multiplicity="0..1" />
+          <End Role="Detallescompra" Type="Self.Detallescompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compra">
+              <PropertyRef Name="id_compra" />
+            </Principal>
+            <Dependent Role="Detallescompra">
+              <PropertyRef Name="id_compra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Detallescompra_Pasaje">
+          <End Role="Pasaje" Type="Self.Pasaje" Multiplicity="0..1" />
+          <End Role="Detallescompra" Type="Self.Detallescompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pasaje">
+              <PropertyRef Name="id_pasaje" />
+            </Principal>
+            <Dependent Role="Detallescompra">
+              <PropertyRef Name="id_pasaje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleado_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="id_rol" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="id_rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pasaje_Ruta">
+          <End Role="Ruta" Type="Self.Ruta" Multiplicity="0..1" />
+          <End Role="Pasaje" Type="Self.Pasaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ruta">
+              <PropertyRef Name="id_ruta" />
+            </Principal>
+            <Dependent Role="Pasaje">
+              <PropertyRef Name="id_ruta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pasaje_Vehiculo">
+          <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="0..1" />
+          <End Role="Pasaje" Type="Self.Pasaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculo">
+              <PropertyRef Name="id_vehiculo" />
+            </Principal>
+            <Dependent Role="Pasaje">
+              <PropertyRef Name="id_vehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ruta_Sucursal">
+          <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="0..1" />
+          <End Role="Ruta" Type="Self.Ruta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursal">
+              <PropertyRef Name="id_sucursal" />
+            </Principal>
+            <Dependent Role="Ruta">
+              <PropertyRef Name="inicio_ruta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ruta_Sucursal1">
+          <End Role="Sucursal" Type="Self.Sucursal" Multiplicity="0..1" />
+          <End Role="Ruta" Type="Self.Ruta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursal">
+              <PropertyRef Name="id_sucursal" />
+            </Principal>
+            <Dependent Role="Ruta">
+              <PropertyRef Name="llegada_ruta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ruta_Vehiculo">
+          <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="1" />
+          <End Role="Ruta" Type="Self.Ruta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculo">
+              <PropertyRef Name="id_vehiculo" />
+            </Principal>
+            <Dependent Role="Ruta">
+              <PropertyRef Name="id_vehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Vehiculo_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="1" />
+          <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="Vehiculo">
+              <PropertyRef Name="id_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EntityModeloBDStoreContainer">
+          <EntitySet Name="Compra" EntityType="Self.Compra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Detallescompra" EntityType="Self.Detallescompra" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pasaje" EntityType="Self.Pasaje" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ruta" EntityType="Self.Ruta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sucursal" EntityType="Self.Sucursal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vehiculo" EntityType="Self.Vehiculo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Compra_Empleado" Association="Self.FK_Compra_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Compra" EntitySet="Compra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Detallescompra_Compra" Association="Self.FK_Detallescompra_Compra">
+            <End Role="Compra" EntitySet="Compra" />
+            <End Role="Detallescompra" EntitySet="Detallescompra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Detallescompra_Pasaje" Association="Self.FK_Detallescompra_Pasaje">
+            <End Role="Pasaje" EntitySet="Pasaje" />
+            <End Role="Detallescompra" EntitySet="Detallescompra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleado_Rol" Association="Self.FK_Empleado_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Empleado" EntitySet="Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pasaje_Ruta" Association="Self.FK_Pasaje_Ruta">
+            <End Role="Ruta" EntitySet="Ruta" />
+            <End Role="Pasaje" EntitySet="Pasaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pasaje_Vehiculo" Association="Self.FK_Pasaje_Vehiculo">
+            <End Role="Vehiculo" EntitySet="Vehiculo" />
+            <End Role="Pasaje" EntitySet="Pasaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ruta_Sucursal" Association="Self.FK_Ruta_Sucursal">
+            <End Role="Sucursal" EntitySet="Sucursal" />
+            <End Role="Ruta" EntitySet="Ruta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ruta_Sucursal1" Association="Self.FK_Ruta_Sucursal1">
+            <End Role="Sucursal" EntitySet="Sucursal" />
+            <End Role="Ruta" EntitySet="Ruta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ruta_Vehiculo" Association="Self.FK_Ruta_Vehiculo">
+            <End Role="Vehiculo" EntitySet="Vehiculo" />
+            <End Role="Ruta" EntitySet="Ruta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Vehiculo_Empleado" Association="Self.FK_Vehiculo_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Vehiculo" EntitySet="Vehiculo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EntityModeloBD" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="id_empleado" />
+          </Key>
+          <Property Name="id_empleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="rut_empleado" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nombre_empleado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellidop_empleado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="apellidom_empleado" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telefono_empleado" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="email_empleado" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="direccion_empleado" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="id_rol" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Rol" Relationship="Self.FK_Empleado_Rol" FromRole="Empleado" ToRole="Rol" />
+          <Property Name="clave_empleado" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Vehiculo" Relationship="EntityModeloBD.FK_Vehiculo_Empleado" FromRole="Empleado" ToRole="Vehiculo" />
+          <NavigationProperty Name="Compra" Relationship="EntityModeloBD.FK_Compra_Empleado" FromRole="Empleado" ToRole="Compra" />
+          </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="id_rol" />
+          </Key>
+          <Property Name="id_rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_rol" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_Empleado_Rol" FromRole="Rol" ToRole="Empleado" />
+        </EntityType>
+        <Association Name="FK_Empleado_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="id_rol" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="id_rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModeloBD" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Empleado" EntityType="Self.Empleado" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" />
+          <AssociationSet Name="FK_Empleado_Rol" Association="Self.FK_Empleado_Rol">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="Empleado" EntitySet="Empleado" />
+          </AssociationSet>
+          <EntitySet Name="Vehiculo" EntityType="EntityModeloBD.Vehiculo" />
+          <AssociationSet Name="FK_Vehiculo_Empleado" Association="EntityModeloBD.FK_Vehiculo_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Vehiculo" EntitySet="Vehiculo" />
+          </AssociationSet>
+          <EntitySet Name="Sucursal" EntityType="EntityModeloBD.Sucursal" />
+          <EntitySet Name="Ruta" EntityType="EntityModeloBD.Ruta" />
+          <AssociationSet Name="FK_Ruta_Sucursal" Association="EntityModeloBD.FK_Ruta_Sucursal">
+            <End Role="Sucursal" EntitySet="Sucursal" />
+            <End Role="Ruta" EntitySet="Ruta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ruta_Sucursal1" Association="EntityModeloBD.FK_Ruta_Sucursal1">
+            <End Role="Sucursal" EntitySet="Sucursal" />
+            <End Role="Ruta" EntitySet="Ruta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ruta_Vehiculo" Association="EntityModeloBD.FK_Ruta_Vehiculo">
+            <End Role="Vehiculo" EntitySet="Vehiculo" />
+            <End Role="Ruta" EntitySet="Ruta" />
+          </AssociationSet>
+          <EntitySet Name="Compra" EntityType="EntityModeloBD.Compra" />
+          <EntitySet Name="Pasaje" EntityType="EntityModeloBD.Pasaje" />
+          <AssociationSet Name="FK_Compra_Empleado" Association="EntityModeloBD.FK_Compra_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Compra" EntitySet="Compra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pasaje_Ruta" Association="EntityModeloBD.FK_Pasaje_Ruta">
+            <End Role="Ruta" EntitySet="Ruta" />
+            <End Role="Pasaje" EntitySet="Pasaje" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pasaje_Vehiculo" Association="EntityModeloBD.FK_Pasaje_Vehiculo">
+            <End Role="Vehiculo" EntitySet="Vehiculo" />
+            <End Role="Pasaje" EntitySet="Pasaje" />
+          </AssociationSet>
+          <EntitySet Name="Detallescompra" EntityType="EntityModeloBD.Detallescompra" />
+          <AssociationSet Name="FK_Detallescompra_Compra" Association="EntityModeloBD.FK_Detallescompra_Compra">
+            <End Role="Compra" EntitySet="Compra" />
+            <End Role="Detallescompra" EntitySet="Detallescompra" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Detallescompra_Pasaje" Association="EntityModeloBD.FK_Detallescompra_Pasaje">
+            <End Role="Pasaje" EntitySet="Pasaje" />
+            <End Role="Detallescompra" EntitySet="Detallescompra" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Vehiculo">
+          <Key>
+            <PropertyRef Name="id_vehiculo" />
+          </Key>
+          <Property Name="id_vehiculo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_vehiculo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="modelo_vehiculo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="capacidad_vehiculo" Type="Int32" Nullable="false" />
+          <Property Name="patente_vehiculo" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="estado_vehiculo" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="id_empleado" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Empleado" Relationship="EntityModeloBD.FK_Vehiculo_Empleado" FromRole="Vehiculo" ToRole="Empleado" />
+          <NavigationProperty Name="Ruta" Relationship="EntityModeloBD.FK_Ruta_Vehiculo" FromRole="Vehiculo" ToRole="Ruta" />
+          <NavigationProperty Name="Pasaje" Relationship="EntityModeloBD.FK_Pasaje_Vehiculo" FromRole="Vehiculo" ToRole="Pasaje" />
+        </EntityType>
+        <Association Name="FK_Vehiculo_Empleado">
+          <End Type="EntityModeloBD.Empleado" Role="Empleado" Multiplicity="1" />
+          <End Type="EntityModeloBD.Vehiculo" Role="Vehiculo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="Vehiculo">
+              <PropertyRef Name="id_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Sucursal">
+          <Key>
+            <PropertyRef Name="id_sucursal" />
+          </Key>
+          <Property Name="id_sucursal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_sucursal" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion_sucursal" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="direccion_sucursal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="lat_sucursal" Type="Double" />
+          <Property Name="long_sucursal" Type="Double" />
+          <NavigationProperty Name="Ruta" Relationship="EntityModeloBD.FK_Ruta_Sucursal" FromRole="Sucursal" ToRole="Ruta" />
+          <NavigationProperty Name="Ruta1" Relationship="EntityModeloBD.FK_Ruta_Sucursal1" FromRole="Sucursal" ToRole="Ruta" />
+          </EntityType>
+        <EntityType Name="Ruta">
+          <Key>
+            <PropertyRef Name="id_ruta" />
+          </Key>
+          <Property Name="id_ruta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_ruta" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion_ruta" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="inicio_ruta" Type="Int32" />
+          <Property Name="llegada_ruta" Type="Int32" />
+          <Property Name="id_vehiculo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sucursal" Relationship="EntityModeloBD.FK_Ruta_Sucursal" FromRole="Ruta" ToRole="Sucursal" />
+          <NavigationProperty Name="Sucursal1" Relationship="EntityModeloBD.FK_Ruta_Sucursal1" FromRole="Ruta" ToRole="Sucursal" />
+          <NavigationProperty Name="Vehiculo" Relationship="EntityModeloBD.FK_Ruta_Vehiculo" FromRole="Ruta" ToRole="Vehiculo" />
+          <NavigationProperty Name="Pasaje" Relationship="EntityModeloBD.FK_Pasaje_Ruta" FromRole="Ruta" ToRole="Pasaje" />
+        </EntityType>
+        <Association Name="FK_Ruta_Sucursal">
+          <End Type="EntityModeloBD.Sucursal" Role="Sucursal" Multiplicity="0..1" />
+          <End Type="EntityModeloBD.Ruta" Role="Ruta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursal">
+              <PropertyRef Name="id_sucursal" />
+            </Principal>
+            <Dependent Role="Ruta">
+              <PropertyRef Name="inicio_ruta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ruta_Sucursal1">
+          <End Type="EntityModeloBD.Sucursal" Role="Sucursal" Multiplicity="0..1" />
+          <End Type="EntityModeloBD.Ruta" Role="Ruta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sucursal">
+              <PropertyRef Name="id_sucursal" />
+            </Principal>
+            <Dependent Role="Ruta">
+              <PropertyRef Name="llegada_ruta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ruta_Vehiculo">
+          <End Type="EntityModeloBD.Vehiculo" Role="Vehiculo" Multiplicity="1" />
+          <End Type="EntityModeloBD.Ruta" Role="Ruta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculo">
+              <PropertyRef Name="id_vehiculo" />
+            </Principal>
+            <Dependent Role="Ruta">
+              <PropertyRef Name="id_vehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Compra">
+          <Key>
+            <PropertyRef Name="id_compra" />
+          </Key>
+          <Property Name="id_compra" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fecha_compra" Type="DateTime" Precision="0" />
+          <Property Name="id_empleado" Type="Int32" />
+          <NavigationProperty Name="Empleado" Relationship="EntityModeloBD.FK_Compra_Empleado" FromRole="Compra" ToRole="Empleado" />
+          <NavigationProperty Name="Detallescompra" Relationship="EntityModeloBD.FK_Detallescompra_Compra" FromRole="Compra" ToRole="Detallescompra" />
+        </EntityType>
+        <EntityType Name="Pasaje">
+          <Key>
+            <PropertyRef Name="id_pasaje" />
+          </Key>
+          <Property Name="id_pasaje" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre_pasaje" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_pasaje" Type="DateTime" Precision="3" />
+          <Property Name="precio_pasaje" Type="Double" />
+          <Property Name="id_vehiculo" Type="Int32" />
+          <Property Name="id_ruta" Type="Int32" />
+          <NavigationProperty Name="Ruta" Relationship="EntityModeloBD.FK_Pasaje_Ruta" FromRole="Pasaje" ToRole="Ruta" />
+          <NavigationProperty Name="Vehiculo" Relationship="EntityModeloBD.FK_Pasaje_Vehiculo" FromRole="Pasaje" ToRole="Vehiculo" />
+          <NavigationProperty Name="Detallescompra" Relationship="EntityModeloBD.FK_Detallescompra_Pasaje" FromRole="Pasaje" ToRole="Detallescompra" />
+        </EntityType>
+        <Association Name="FK_Compra_Empleado">
+          <End Type="EntityModeloBD.Empleado" Role="Empleado" Multiplicity="0..1" />
+          <End Type="EntityModeloBD.Compra" Role="Compra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="Compra">
+              <PropertyRef Name="id_empleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pasaje_Ruta">
+          <End Type="EntityModeloBD.Ruta" Role="Ruta" Multiplicity="0..1" />
+          <End Type="EntityModeloBD.Pasaje" Role="Pasaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ruta">
+              <PropertyRef Name="id_ruta" />
+            </Principal>
+            <Dependent Role="Pasaje">
+              <PropertyRef Name="id_ruta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pasaje_Vehiculo">
+          <End Type="EntityModeloBD.Vehiculo" Role="Vehiculo" Multiplicity="0..1" />
+          <End Type="EntityModeloBD.Pasaje" Role="Pasaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vehiculo">
+              <PropertyRef Name="id_vehiculo" />
+            </Principal>
+            <Dependent Role="Pasaje">
+              <PropertyRef Name="id_vehiculo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Detallescompra">
+          <Key>
+            <PropertyRef Name="id_detalles" />
+          </Key>
+          <Property Name="id_detalles" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_compra" Type="Int32" />
+          <Property Name="id_pasaje" Type="Int32" />
+          <Property Name="precio_pasaje" Type="Double" />
+          <Property Name="cantidad_compra" Type="Int32" />
+          <Property Name="total_compra" Type="Int32" />
+          <NavigationProperty Name="Compra" Relationship="EntityModeloBD.FK_Detallescompra_Compra" FromRole="Detallescompra" ToRole="Compra" />
+          <NavigationProperty Name="Pasaje" Relationship="EntityModeloBD.FK_Detallescompra_Pasaje" FromRole="Detallescompra" ToRole="Pasaje" />
+        </EntityType>
+        <Association Name="FK_Detallescompra_Compra">
+          <End Type="EntityModeloBD.Compra" Role="Compra" Multiplicity="0..1" />
+          <End Type="EntityModeloBD.Detallescompra" Role="Detallescompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Compra">
+              <PropertyRef Name="id_compra" />
+            </Principal>
+            <Dependent Role="Detallescompra">
+              <PropertyRef Name="id_compra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Detallescompra_Pasaje">
+          <End Type="EntityModeloBD.Pasaje" Role="Pasaje" Multiplicity="0..1" />
+          <End Type="EntityModeloBD.Detallescompra" Role="Detallescompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pasaje">
+              <PropertyRef Name="id_pasaje" />
+            </Principal>
+            <Dependent Role="Detallescompra">
+              <PropertyRef Name="id_pasaje" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EntityModeloBDStoreContainer" CdmEntityContainer="ModeloBD">
+          <EntitySetMapping Name="Empleado">
+            <EntityTypeMapping TypeName="EntityModeloBD.Empleado">
+              <MappingFragment StoreEntitySet="Empleado">
+                <ScalarProperty Name="clave_empleado" ColumnName="clave_empleado" />
+                <ScalarProperty Name="id_empleado" ColumnName="id_empleado" />
+                <ScalarProperty Name="rut_empleado" ColumnName="rut_empleado" />
+                <ScalarProperty Name="nombre_empleado" ColumnName="nombre_empleado" />
+                <ScalarProperty Name="apellidop_empleado" ColumnName="apellidop_empleado" />
+                <ScalarProperty Name="apellidom_empleado" ColumnName="apellidom_empleado" />
+                <ScalarProperty Name="telefono_empleado" ColumnName="telefono_empleado" />
+                <ScalarProperty Name="email_empleado" ColumnName="email_empleado" />
+                <ScalarProperty Name="direccion_empleado" ColumnName="direccion_empleado" />
+                <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rol">
+            <EntityTypeMapping TypeName="EntityModeloBD.Rol">
+              <MappingFragment StoreEntitySet="Rol">
+                <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+                <ScalarProperty Name="nombre_rol" ColumnName="nombre_rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vehiculo">
+            <EntityTypeMapping TypeName="EntityModeloBD.Vehiculo">
+              <MappingFragment StoreEntitySet="Vehiculo">
+                <ScalarProperty Name="id_empleado" ColumnName="id_empleado" />
+                <ScalarProperty Name="estado_vehiculo" ColumnName="estado_vehiculo" />
+                <ScalarProperty Name="patente_vehiculo" ColumnName="patente_vehiculo" />
+                <ScalarProperty Name="capacidad_vehiculo" ColumnName="capacidad_vehiculo" />
+                <ScalarProperty Name="modelo_vehiculo" ColumnName="modelo_vehiculo" />
+                <ScalarProperty Name="nombre_vehiculo" ColumnName="nombre_vehiculo" />
+                <ScalarProperty Name="id_vehiculo" ColumnName="id_vehiculo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sucursal">
+            <EntityTypeMapping TypeName="EntityModeloBD.Sucursal">
+              <MappingFragment StoreEntitySet="Sucursal">
+                <ScalarProperty Name="long_sucursal" ColumnName="long_sucursal" />
+                <ScalarProperty Name="lat_sucursal" ColumnName="lat_sucursal" />
+                <ScalarProperty Name="direccion_sucursal" ColumnName="direccion_sucursal" />
+                <ScalarProperty Name="descripcion_sucursal" ColumnName="descripcion_sucursal" />
+                <ScalarProperty Name="nombre_sucursal" ColumnName="nombre_sucursal" />
+                <ScalarProperty Name="id_sucursal" ColumnName="id_sucursal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ruta">
+            <EntityTypeMapping TypeName="EntityModeloBD.Ruta">
+              <MappingFragment StoreEntitySet="Ruta">
+                <ScalarProperty Name="id_vehiculo" ColumnName="id_vehiculo" />
+                <ScalarProperty Name="llegada_ruta" ColumnName="llegada_ruta" />
+                <ScalarProperty Name="inicio_ruta" ColumnName="inicio_ruta" />
+                <ScalarProperty Name="descripcion_ruta" ColumnName="descripcion_ruta" />
+                <ScalarProperty Name="nombre_ruta" ColumnName="nombre_ruta" />
+                <ScalarProperty Name="id_ruta" ColumnName="id_ruta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Compra">
+            <EntityTypeMapping TypeName="EntityModeloBD.Compra">
+              <MappingFragment StoreEntitySet="Compra">
+                <ScalarProperty Name="id_empleado" ColumnName="id_empleado" />
+                <ScalarProperty Name="fecha_compra" ColumnName="fecha_compra" />
+                <ScalarProperty Name="id_compra" ColumnName="id_compra" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pasaje">
+            <EntityTypeMapping TypeName="EntityModeloBD.Pasaje">
+              <MappingFragment StoreEntitySet="Pasaje">
+                <ScalarProperty Name="id_ruta" ColumnName="id_ruta" />
+                <ScalarProperty Name="id_vehiculo" ColumnName="id_vehiculo" />
+                <ScalarProperty Name="precio_pasaje" ColumnName="precio_pasaje" />
+                <ScalarProperty Name="fecha_pasaje" ColumnName="fecha_pasaje" />
+                <ScalarProperty Name="nombre_pasaje" ColumnName="nombre_pasaje" />
+                <ScalarProperty Name="id_pasaje" ColumnName="id_pasaje" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Detallescompra">
+            <EntityTypeMapping TypeName="EntityModeloBD.Detallescompra">
+              <MappingFragment StoreEntitySet="Detallescompra">
+                <ScalarProperty Name="total_compra" ColumnName="total_compra" />
+                <ScalarProperty Name="cantidad_compra" ColumnName="cantidad_compra" />
+                <ScalarProperty Name="precio_pasaje" ColumnName="precio_pasaje" />
+                <ScalarProperty Name="id_pasaje" ColumnName="id_pasaje" />
+                <ScalarProperty Name="id_compra" ColumnName="id_compra" />
+                <ScalarProperty Name="id_detalles" ColumnName="id_detalles" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

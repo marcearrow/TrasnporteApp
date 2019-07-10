@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.705
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "TrasnporteProyecto", "TrasnporteProyecto\", "{D5B4E727-A264-461D-A6C6-27A001C01AED}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.6.1"
+		ProjectReferences = "{aba3ccc4-d17b-4fb5-bb9d-a33da22bf3d6}|EntityModeloBD.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_63150"
+		Debug.AspNetCompiler.PhysicalPath = "TrasnporteProyecto\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_63150\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_63150"
+		Release.AspNetCompiler.PhysicalPath = "TrasnporteProyecto\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_63150\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "63150"
+		SlnRelativePath = "TrasnporteProyecto\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityModeloBD", "EntityModeloBD\EntityModeloBD.csproj", "{ABA3CCC4-D17B-4FB5-BB9D-A33DA22BF3D6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D5B4E727-A264-461D-A6C6-27A001C01AED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5B4E727-A264-461D-A6C6-27A001C01AED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5B4E727-A264-461D-A6C6-27A001C01AED}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5B4E727-A264-461D-A6C6-27A001C01AED}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{ABA3CCC4-D17B-4FB5-BB9D-A33DA22BF3D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABA3CCC4-D17B-4FB5-BB9D-A33DA22BF3D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABA3CCC4-D17B-4FB5-BB9D-A33DA22BF3D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABA3CCC4-D17B-4FB5-BB9D-A33DA22BF3D6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {61A15DB0-C09F-4EDC-9BAF-82EDC7DAC033}
+	EndGlobalSection
+EndGlobal
