@@ -142,10 +142,12 @@ public partial class _Default : System.Web.UI.Page
         {
             bd.Sucursal.Remove(resultado);
             //cuidado con claves foraneas
+            //se debe crear la foreign key on cascade
             bd.SaveChanges();
             LlenarSucursales();
             ltModificar.Text = "eliminado";
             BuscarInput.Text = "";
+
         }
         else
         {

@@ -1,0 +1,74 @@
+CREATE TABLE Rol
+(id_rol INT PRIMARY KEY IDENTITY(1,1),
+nombre_rol VARCHAR(20) NOT NULL
+);
+
+
+CREATE TABLE Empleado(
+id_empleado INT PRIMARY KEY IDENTITY(1,1),
+rut_empleado VARCHAR(12) NOT NULL,
+clave_empleado VARCHAR(20) NOT NULL,
+nombre_empleado VARCHAR(20) NOT NULL,
+apellidop_empleado VARCHAR(20) NOT NULL,
+apellidom_empleado VARCHAR(20) NOT NULL,
+telefono_empleado VARCHAR(10),
+email_empleado VARCHAR(40),
+direccion_empleado VARCHAR(40),
+id_rol INT NOT NULL
+);
+
+
+CREATE TABLE Vehiculo(
+id_vehiculo INT PRIMARY KEY IDENTITY(1,1),
+nombre_vehiculo VARCHAR(20) NOT NULL,
+modelo_vehiculo VARCHAR(20) NOT NULL,
+capacidad_vehiculo INT NOT NULL,
+patente_vehiculo VARCHAR(8) NOT NULL,
+estado_vehiculo VARCHAR(20) NOT NULL,
+id_empleado INT NOT NULL);
+
+CREATE TABLE Sucursal(
+id_sucursal INT PRIMARY KEY IDENTITY(1,1),
+nombre_sucursal VARCHAR(20) NOT NULL,
+descripcion_sucursal VARCHAR(100) NOT NULL,
+direccion_sucursal VARCHAR(50),
+lat_sucursal FLOAT,
+long_sucursal FLOAT);
+
+CREATE TABLE Ruta(
+id_ruta INT PRIMARY KEY IDENTITY(1,1),
+nombre_ruta VARCHAR(25) NOT NULL,
+descripcion_ruta VARCHAR(50) NOT NULL,
+inicio_ruta INT,
+llegada_ruta INT,
+id_vehiculo INT,
+);
+
+CREATE TABLE Pasaje(
+id_pasaje INT PRIMARY KEY  IDENTITY(1,1),
+nombre_pasaje VARCHAR(40),
+fecha_pasaje DATETIME,
+precio_pasaje FLOAT	,
+id_vehiculo INT,
+id_ruta INT
+);
+
+CREATE TABLE Compra(
+id_compra INT PRIMARY KEY IDENTITY(1,1),
+fecha_compra DATE,
+id_empleado INT,
+
+);
+
+CREATE TABLE Detallescompra(
+id_detalles INT PRIMARY KEY IDENTITY(1,1),
+id_compra INT,
+id_pasaje INT,
+precio_pasaje FLOAT,
+cantidad_compra INT,
+total_compra INT,
+);
+
+
+
+agregar validaciones de vacio para sucursales rutas y pasajes
