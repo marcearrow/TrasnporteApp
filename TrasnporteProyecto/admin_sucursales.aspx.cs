@@ -141,6 +141,7 @@ public partial class _Default : System.Web.UI.Page
         if (resultado != null)
         {
             bd.Sucursal.Remove(resultado);
+            //cuidado con claves foraneas
             bd.SaveChanges();
             LlenarSucursales();
             ltModificar.Text = "eliminado";
